@@ -5,7 +5,7 @@ import { Pressable } from "react-native";
 export default function foodGrid(props) {
 
     return (
-        <Pressable style={styles.container}>
+        <Pressable style={styles.container} onPress={props.onPress}>
             <Image style={styles.image} source={{ uri: props.imageUrl }} />
             <Text style={styles.textTitle}>{props.title}</Text>
             <Text style={styles.textdetail}>{props.duration}   {props.complexity}   {props.affordability}</Text>

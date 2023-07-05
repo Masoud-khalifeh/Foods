@@ -3,6 +3,7 @@ import { CATEGORIES } from '../data/dummy-data'
 import { FlatList } from "react-native";
 import { StyleSheet } from "react-native";
 import SingleGrid from "../components/SingleGrid";
+import { colors } from "../data/Colors";
 
 
 export default function Categories({navigation}) {
@@ -39,7 +40,7 @@ const styles = StyleSheet.create({
     container: {
         alignItems:"center",
         flex:1,
-        backgroundColor:"#3f3025",
+        backgroundColor:colors.primary,
         paddingTop:10
 
     },

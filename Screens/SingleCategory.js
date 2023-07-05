@@ -3,6 +3,8 @@ import { MEALS } from '../data/dummy-data';
 import FoodGrid from "../components/FoodGrid";
 import { FlatList } from "react-native";
 import { StyleSheet } from "react-native";
+import {colors} from '../data/Colors'
+
 
 export default function SingleCategory({ route, navigation }) {
     const { id } = route.params;
@@ -29,7 +31,7 @@ const styles = StyleSheet.create({
     container: {
         width: "100%",
         height: "100%",
-        backgroundColor: "#3f3025",
+        backgroundColor: colors.primary,
     },
     flatlist: {
         paddingBottom: 30

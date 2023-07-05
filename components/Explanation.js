@@ -1,6 +1,7 @@
 import { StyleSheet } from "react-native"
 import { View, Text } from "react-native";
 import uuid from 'react-native-uuid';
+import {colors} from '../data/Colors'
 
 export default function Explanation(props) {
 
@@ -30,7 +31,7 @@ const styles = StyleSheet.create({
     },
     itemsView: {
         borderTopWidth: "4%",
-        borderTopColor: "#e2b59b",
+        borderTopColor: colors.secondary,
         paddingTop:"3%",
         width: "80%",
         alignItems: "center"
@@ -39,17 +40,17 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 700,
         paddingBottom:"3%",
-        color:"#e2b59b"
+        color:colors.secondary
     },
     detailText: {
         width:"100%",
-        backgroundColor: "#e2b59b",
+        backgroundColor: colors.secondary,
         borderRadius: 10,
         margin: "1%",
         overflow: "hidden",
         paddingHorizontal: "2%",
         paddingVertical:"1%",
-        color:"#3f3025",
+        color:colors.primary,
         fontWeight:400
     }
 })

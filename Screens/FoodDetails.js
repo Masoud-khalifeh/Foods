@@ -2,6 +2,7 @@ import { Text, ScrollView, View } from "react-native";
 import { MEALS } from "../data/dummy-data";
 import { Image, StyleSheet } from "react-native";
 import Explanation from "../components/Explanation";
+import {colors} from '../data/Colors';
 
 export default function FoodDetails({ route }) {
     const { id } = route.params;
@@ -26,14 +27,16 @@ export default function FoodDetails({ route }) {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: "#3f3025",
+        backgroundColor: colors.primary,
+        paddingBottom:"5%"
     },
     header: {
-        alignItems: "center"
+        alignItems: "center",
+        height:"40%"
     },
     image: {
         width: "100%",
-        height: 200
+        height: "80%"
     },
     title: {
         color: "white",
@@ -42,10 +45,10 @@ const styles = StyleSheet.create({
         fontWeight: "800"
     },
     details: {
-        color: "#fff4ee",
+        color: colors.extra,
         marginBottom:5
     },
     scroll:{
-        height:"65%",
+        height:"60%",
     }
 })

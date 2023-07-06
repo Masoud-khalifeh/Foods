@@ -1,10 +1,11 @@
-import { useLayoutEffect, useState } from "react";
+import { useLayoutEffect, useState, useContext, useEffect } from "react";
 import { Text, ScrollView, View } from "react-native";
 import { MEALS } from "../data/dummy-data";
 import { Image, StyleSheet } from "react-native";
 import Explanation from "../components/Explanation";
 import { colors } from '../data/Colors';
 import IconProducer from "../components/Icon";
+import { FavoriteContextModule } from "../store/context/FavoriteContext";
 
 
 
@@ -12,13 +13,21 @@ import IconProducer from "../components/Icon";
 export default function FoodDetails({ route, navigation }) {
     const { id } = route.params;
     const food = (MEALS.filter(item => item.id === id))[0];
-    const [isFavorited, setIsFavorited] = useState(false);
+    const [isFavorited, setIsFavorited] = useState();
+
+    const dataShared = useContext(FavoriteContextModule);
+    useEffect(() => {
+        setIsFavorited(dataShared.favorites.includes(id))
+    }, [])
 
 
     function pressHandler() {
+        if (isFavorited) {
+            dataShared.remove(id)
+        } else {
+            dataShared.add(id)
+        }
         setIsFavorited(!isFavorited);
- 
-
     }
 
     useLayoutEffect(() => {

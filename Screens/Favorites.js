@@ -3,24 +3,32 @@ import { MEALS } from '../data/dummy-data';
 import FoodGrid from "../components/FoodGrid";
 import { FlatList } from "react-native";
 import { StyleSheet } from "react-native";
-import {colors} from '../data/Colors'
+import { colors } from '../data/Colors';
+import { useContext } from "react";
+import { FavoriteContextModule } from '../store/context/FavoriteContext'
 
 
-export default function Favorite({  navigation }) {
-    
+export default function Favorite({ navigation }) {
 
-    function foodPressHandler(id,title) {
-        navigation.navigate("FoodDetails", { id: id,title: title })
+    const sharedData = useContext(FavoriteContextModule);
+    const newList = MEALS.filter((item) =>
+        sharedData.favorites.includes(item.id)
+    );
+
+
+    function foodPressHandler(id, title) {
+        navigation.navigate("FoodDetails", { id: id, title: title })
     }
-console.log(MEALS)
+
     return (
         <View style={styles.container}>
-
-            <FlatList contentContainerStyle={styles.flatlist} data={MEALS} keyExtractor={(item) => item.id} renderItem={({ item }) => (
-                <FoodGrid {...item} onPress={() => foodPressHandler(item.id,item.title)} />
-            )} />
-
-
+            {newList.length ?
+                <FlatList contentContainerStyle={styles.flatlist} data={newList} renderItem={({ item }) => (
+                    <FoodGrid {...item} onPress={() => foodPressHandler(item.id, item.title)} />
+                )} />
+                :
+                <Text style={styles.text}>There is no Favorite Food</Text>
+            }
         </View>
 
     )
@@ -31,8 +39,16 @@ const styles = StyleSheet.create({
         width: "100%",
         height: "100%",
         backgroundColor: colors.primary,
+        justifyContent:"center"
+       
     },
     flatlist: {
         paddingBottom: 30
+    },
+    text:{
+       color:"white",
+       fontSize:20,
+       marginBottom:150,
+       textAlign:"center"
     }
 })

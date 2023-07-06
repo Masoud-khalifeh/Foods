@@ -1,12 +1,34 @@
+import { useLayoutEffect, useState } from "react";
 import { Text, ScrollView, View } from "react-native";
 import { MEALS } from "../data/dummy-data";
 import { Image, StyleSheet } from "react-native";
 import Explanation from "../components/Explanation";
-import {colors} from '../data/Colors';
+import { colors } from '../data/Colors';
+import IconProducer from "../components/Icon";
 
-export default function FoodDetails({ route }) {
+
+
+
+export default function FoodDetails({ route, navigation }) {
     const { id } = route.params;
     const food = (MEALS.filter(item => item.id === id))[0];
+    const [isFavorited, setIsFavorited] = useState(false);
+
+
+    function pressHandler() {
+        setIsFavorited(!isFavorited);
+ 
+
+    }
+
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            headerRight: () => {
+                return <IconProducer filled={isFavorited} onPress={pressHandler} />
+            }
+        })
+    }, [navigation, isFavorited])
+
     return (
         < View style={styles.container}>
             <View style={styles.header}>
@@ -26,13 +48,18 @@ export default function FoodDetails({ route }) {
 
 
 const styles = StyleSheet.create({
+    icon: {
+        fontSize: 24,
+        marginRight: 15,
+        color: 'red',
+    },
     container: {
         backgroundColor: colors.primary,
-        paddingBottom:"5%"
+        paddingBottom: "5%"
     },
     header: {
         alignItems: "center",
-        height:"40%"
+        height: "40%"
     },
     image: {
         width: "100%",
@@ -41,14 +68,14 @@ const styles = StyleSheet.create({
     title: {
         color: "white",
         fontSize: 20,
-        paddingVertical:10,
+        paddingVertical: 10,
         fontWeight: "800"
     },
     details: {
         color: colors.extra,
-        marginBottom:5
+        marginBottom: 5
     },
-    scroll:{
-        height:"60%",
+    scroll: {
+        height: "60%",
     }
 })
